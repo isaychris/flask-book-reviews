@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Search</title>
+    </head>
+    <body>
+        <h1>Results</h1>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+            </tr>
+            {% for result in results %}
+            <tr>
+                <td> {{ result.title }} </td>
+                <td> {{ result.author }} </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

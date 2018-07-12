@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Register</title>
+    </head>
+    <body>
+        {% if message is not none %}
+            <p> {{ message }}</p>
+        {% endif %}
+
+        <h1>Create Account</h1>
+        <form action="{{ url_for('register')}}"method="post">
+            <input name="username" type="text" placeholder="username">
+            <input name="password" type="text" placeholder="password">
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>

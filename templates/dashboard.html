@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>Dashboard</title>
+    </head>
+    <body>
+        <h1>Search for a Book</h1>
+        <form action="{{ url_for('search') }}" method="post">
+            <input name="test5" type="text" placeholder="Title, ISBN, Author ...">
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>
