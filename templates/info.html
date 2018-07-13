@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>Info</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <h1>Info</h1>
+        <p><img src="http://covers.openlibrary.org/b/ISBN/{{ book_info[1] }}-M.jpg"></p>
+        <p>Title: {{ book_info[2] }} </p>
+        <p>Author: {{ book_info[3] }} </p>
+        <p>Year: {{ book_info[4] }} </p>
+        <p>ISBN: {{ book_info[1] }} </p>
+        <p>Goodreads Rating: {{ rating }} / 5 </p>
+
+        <h1>Reviews</h1>
+        <form action="{{ url_for('info', isbn=book_info[1]) }}" method="post">
+            <input name="comment" type="text" placeholder="Comment here ...">
+            <select name="rating">
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+                <option value="0">0</option>
+              </select>
+            <button type="submit">Submit</button>
+        </form>
+        <table>
+            <tr>
+                <th> User <th>
+                <th> Comment <th>
+                <th> Rating <th>
+            </tr>
+            
+            {% for review in reviews %}
+            <tr>
+                <td> {{ review.acc_id }} </td>
+                <td> {{ review.comment }} </td>
+                <td> {{ review.rating }} </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </body>
+</html>

@@ -1,11 +1,15 @@
 <html>
     <head>
         <title>Dashboard</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
+        {% if logged is not none %}
+        <p>You are logged in as {{ logged }} </p>
+        {% endif %}
         <h1>Search for a Book</h1>
         <form action="{{ url_for('search') }}" method="post">
-            <input name="test5" type="text" placeholder="Title, ISBN, Author ...">
+            <input name="searchbox" type="text" placeholder="Title, ISBN, Author ...">
             <button type="submit">Submit</button>
         </form>
     </body>

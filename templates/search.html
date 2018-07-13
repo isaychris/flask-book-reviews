@@ -1,17 +1,20 @@
 <html>
     <head>
         <title>Search</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
         <h1>Results</h1>
         <table>
             <tr>
+                <th>#</th>
                 <th>Title</th>
                 <th>Author</th>
             </tr>
             {% for result in results %}
             <tr>
-                <td> {{ result.title }} </td>
+                <td> {{ loop.index }} </td>
+                <td> <a href="{{ url_for('info', isbn=result.isbn) }}"> {{ result.title }}</a></td>
                 <td> {{ result.author }} </td>
             </tr>
             {% endfor %}
