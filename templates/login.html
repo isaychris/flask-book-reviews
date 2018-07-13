@@ -2,17 +2,35 @@
     <head>
         <title>Login</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     </head>
-    <body>
-        {% if message is not none %}
-            <p> {{ message }}</p>
-        {% endif %}
+    <nav class="navbar navbar-dark bg-dark">
+        <a id="navbarHeader" class="navbar-brand" href="#"><img src="{{ url_for('static', filename='icon.png') }}" width="30" height="30" class="d-inline-block align-top" alt=""> BookSearch </a>
+        <a class="btn btn-success" href="{{ url_for('register') }}"> Sign up </a>
+    </nav>
 
-        <h1>Login</h1>
-        <form action="{{ url_for('login') }}" method="post">
-            <input name="username" type="text" placeholder="username">
-            <input name="password" type="text" placeholder="password">
-            <button type="submit">Submit</button>
-        </form>
-    </body>
-</html>
+    <body>
+            <div class="container">
+    
+                <div id="wrapper">
+                {% if message is not none %}
+                <div class="alert alert-danger text-center" role="alert">
+                     {{ message }}
+                </div>
+                {% endif %}
+                <div class="card text-center">
+                    <div class="card-header">Login</div>
+                    <div class="card-body">
+                        <form action="{{ url_for('login') }}" method="post">
+                            <input class="form-control" name="username" type="text" placeholder="username">
+                            <br>
+                            <input class="form-control" name="password" type="password" placeholder="password">
+                            <br>
+                            <button class="btn btn-primary" type="submit" style="width:100%;">Enter</button>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </body>
+    </html>

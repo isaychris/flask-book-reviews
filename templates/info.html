@@ -1,45 +1,82 @@
 <html>
     <head>
-        <title>Info</title>
+        <title>Info </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stars.css') }}">
+
     </head>
+    <nav class="navbar navbar-dark bg-dark">
+        <a id="navbarHeader" class="navbar-brand" href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='icon.png') }}" width="30" height="30" class="d-inline-block align-top" alt=""> BookSearch </a>
+        <a class="btn btn-primary" href="{{ url_for('logout') }}"> Logout </a>
+    </nav>
     <body>
-        <h1>Info</h1>
-        <p><img src="http://covers.openlibrary.org/b/ISBN/{{ book_info[1] }}-M.jpg"></p>
-        <p>Title: {{ book_info[2] }} </p>
-        <p>Author: {{ book_info[3] }} </p>
-        <p>Year: {{ book_info[4] }} </p>
-        <p>ISBN: {{ book_info[1] }} </p>
-        <p>Goodreads Rating: {{ rating }} / 5 </p>
+        <div class="container" style="margin: 50px auto 50px auto;">
+            <div class="row">
+                <div class="col-auto">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="http://covers.openlibrary.org/b/ISBN/{{ book_info[1] }}-M.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h6 class="card-title"> Title </h6>
+                            <p class="card-text">{{ book_info[2] }}</p>
+                            <h6 class="card-title"> Author</h6>
+                            <p class="card-text">{{ book_info[3] }}</p>
+                            <h6 class="card-title"> Year </h6>
+                            <p class="card-text">{{ book_info[4] }}</p>
+                            <h6 class="card-title"> ISBN </h6>
+                            <p class="card-text">{{ book_info[1] }}</p>
+                            <h6 class="card-title"> Goodread Rating </h6>
+                            <p class="card-text">{{ rating }} / 5</p>
+                        </div>
+                    </div>
+                </div>
 
-        <h1>Reviews</h1>
-        <form action="{{ url_for('info', isbn=book_info[1]) }}" method="post">
-            <input name="comment" type="text" placeholder="Comment here ...">
-            <select name="rating">
-                <option value="5">5</option>
-                <option value="4">4</option>
-                <option value="3">3</option>
-                <option value="2">2</option>
-                <option value="1">1</option>
-                <option value="0">0</option>
-              </select>
-            <button type="submit">Submit</button>
-        </form>
-        <table>
-            <tr>
-                <th> User <th>
-                <th> Comment <th>
-                <th> Rating <th>
-            </tr>
-            
-            {% for review in reviews %}
-            <tr>
-                <td> {{ review.acc_id }} </td>
-                <td> {{ review.comment }} </td>
-                <td> {{ review.rating }} </td>
-            </tr>
-            {% endfor %}
+                <div class="col">
+                    <div class="card">
+                            <div class="card-header text-center">Reviews</div>
+                            <div class="card-body">
+                                <form action="{{ url_for('info', isbn=book_info[1]) }}" method="post">
+                                        <fieldset>
+                                            <input type="radio" id="st1" name="rating" value="1" checked="checked"/>
+                                            <label for="st1"></label>
+                                            <input type="radio" id="st2" name="rating" value="2" />
+                                            <label for="st2"></label>
+                                            <input type="radio" id="st3" name="rating" value="3" />
+                                            <label for="st3"></label>
+                                            <input type="radio" id="st4" name="rating" value="4" />
+                                            <label for="st4"></label>
+                                            <input type="radio" id="st5" name="rating" value="5" />
+                                            <label for="st5"></label>
+                                        </fieldset>
+                                        <textarea class="form-control" name="comment" rows="3" placeholder="Comment here ..."></textarea>
+                                        <br>
+                                        <button class="btn btn-primary" type="submit">Submit</button>
+                                    </form>
+                                    <table class="table table-striped">
+                                        <thead>
 
-        </table>
+                                        <tr>
+                                            <th> User </th>
+                                            <th> Comment </th>
+                                            <th> Rating </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for review in reviews %}
+                                        <tr>
+                                            <td> {{ review.acc_id }} </td>
+                                            <td> {{ review.comment }} </td>
+                                            <td> {{ review.rating }} </td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+
+                                    </table>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

@@ -2,15 +2,30 @@
     <head>
         <title>Dashboard</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     </head>
+    <nav class="navbar navbar-dark bg-dark">
+        <a id="navbarHeader" class="navbar-brand" href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='icon.png') }}" width="30" height="30" class="d-inline-block align-top" alt=""> BookSearch </a>
+
+        <div id="btn-group">
+            <a class="btn btn-primary" href="{{ url_for('logout') }}"> Logout </a>
+        </div>
+    </nav>
+          
     <body>
-        {% if logged is not none %}
-        <p>You are logged in as {{ logged }} </p>
-        {% endif %}
-        <h1>Search for a Book</h1>
-        <form action="{{ url_for('search') }}" method="post">
-            <input name="searchbox" type="text" placeholder="Title, ISBN, Author ...">
-            <button type="submit">Submit</button>
-        </form>
+        <div class="container">
+            <div class="card text-center" id="wrapper">
+                <div class="card-header">Dashboard</div>
+                <div class="card-body">
+                    <form action="{{ url_for('search') }}" method="post">
+                        <input class="form-control" name="searchbox" type="text" placeholder="Title, ISBN, Author ...">
+                        <br>
+                        <button type="submit" class="btn btn-primary" style="width:100%;"> Search </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>

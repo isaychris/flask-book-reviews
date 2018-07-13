@@ -1,3 +1,4 @@
+import sys
 import csv
 import os
 
@@ -12,10 +13,14 @@ def main():
     reader = csv.reader(f)
     header = next(reader)
 
-    for i, isbn, title, author, year in enumerate(reader):
+    print("Running script ... ")
+    for isbn, title, author, year in reader:
         db.execute("INSERT INTO books(isbn, title, author, year) VALUES(:i, :t, :a, :y)", {"i": isbn, "t": title, "a": author, "y": year})
-        print(isbn, title, year, author)
+
     db.commit()
+    
+    print("Completed ... ")
+
 
 if __name__ == "__main__":
     main()
