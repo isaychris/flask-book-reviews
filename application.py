@@ -1,5 +1,3 @@
-import os
-
 from flask import Flask, session, render_template, request, redirect, url_for, flash,jsonify
 from flask_session import Session
 from sqlalchemy import create_engine, exc
@@ -132,3 +130,6 @@ def api(isbn):
         "review_count": data['reviews_count'],
         "average_rating": data['average_rating']
     })
+	
+if __name__ == "__main__":
+	app.run()
