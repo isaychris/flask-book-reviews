@@ -1,4 +1,4 @@
-import os 
+import os
 
 from flask import Flask, session, render_template, request, redirect, url_for, flash,jsonify
 from flask_session import Session
@@ -40,7 +40,8 @@ def register():
             db.commit()
 
             if result.rowcount > 0:
-                message = "Account created!"
+                session['user'] = usern
+                return redirect(url_for('dashboard'))
 
         except exc.IntegrityError:
             message = "Username already exists."
@@ -132,6 +133,3 @@ def api(isbn):
         "review_count": data['reviews_count'],
         "average_rating": data['average_rating']
     })
-	
-if __name__ == "__main__":
-	app.run()

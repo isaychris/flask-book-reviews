@@ -22,9 +22,9 @@
                 <div class="card-header">Register</div>
                 <div class="card-body">
                     <form action="{{ url_for('register') }}" method="post">
-                        <input class="form-control" name="username" type="text" placeholder="username">
+                        <input class="form-control" name="username" type="text" placeholder="username" required maxlength="30">
                         <br>
-                        <input class="form-control" name="password" type="password" placeholder="password">
+                        <input class="form-control" name="password" type="password" placeholder="password" required maxlength="30"> 
                         <br>
                         <button class="btn btn-primary" type="submit" style="width:100%;">Enter</button>
                     </form>
