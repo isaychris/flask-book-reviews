@@ -5,7 +5,7 @@ flask web application for writing book reviews.
 https://docs.cs50.net/web/2018/w/projects/1/project1.html
  
 ### Website:
-https://project1-seiya.herokuapp.com
+https://seiya-book-reviews.herokuapp.com
 
 # Screenshots:
 ### Register
