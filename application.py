@@ -1,12 +1,14 @@
 import os
 
-from flask import Flask, session, render_template, request, redirect, url_for, flash,jsonify
+from flask import Flask, session, render_template, request, redirect, url_for, flash, jsonify
+from flask.ext.bcrypt import Bcrypt
 from flask_session import Session
 from sqlalchemy import create_engine, exc
 from sqlalchemy.orm import scoped_session, sessionmaker
 import requests
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
@@ -36,7 +38,9 @@ def register():
         try: 
             usern = request.form.get("username")
             passw = request.form.get("password")
-            result = db.execute("INSERT INTO accounts (username, password) VALUES (:u, :p)", {"u": usern, "p": passw})
+            passw_hash = bcrypt.generate_password_hash(passw).decode('utf-8')
+
+            result = db.execute("INSERT INTO accounts (username, password) VALUES (:u, :p)", {"u": usern, "p": passw_hash})
             db.commit()
 
             if result.rowcount > 0:
@@ -64,17 +68,16 @@ def login():
 
     if request.method == "POST":
         usern = request.form.get("username")
-        passw = request.form.get("password")
-        result = db.execute("SELECT * FROM accounts WHERE username = :u AND password = :p", {"u": usern, "p": passw})
+        passw = request.form.get("password").encode('utf-8')
+        result = db.execute("SELECT * FROM accounts WHERE username = :u", {"u": usern}).fetchone()
 
-        if result.rowcount > 0:
-            session['user'] = usern
-            return redirect(url_for('dashboard'))
-        else:
-            message = "Username or password is incorrect."
-            db.execute("ROLLBACK")
-            db.commit()
+        if result is not None:
+            print(result['password'])
+            if bcrypt.check_password_hash(result['password'], passw) is True:
+                session['user'] = usern
+                return redirect(url_for('dashboard'))
 
+        message = "Username or password is incorrect."
     return render_template("login.html", message=message)
 
 
@@ -88,6 +91,9 @@ def dashboard():
 
 @app.route("/dashboard/search", methods=["POST"])
 def search():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+
     message = None
     query = request.form.get("searchbox")
     query = '%' + query.lower() + '%'

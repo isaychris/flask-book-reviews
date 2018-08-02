@@ -29,5 +29,6 @@ https://seiya-book-reviews.herokuapp.com
 * ~~Reviews~~
 * ~~API~~
 * ~~Design~~
+* ~~Salt & Hash~~~
 * Error Handling
 * Documentation
