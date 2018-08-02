@@ -5,3 +5,4 @@ SQLAlchemy
 flask-bcrypt
 gunicorn
 requests
+flask.ext.bcrypt
